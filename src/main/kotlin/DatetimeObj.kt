@@ -1,4 +1,5 @@
-import com.beust.klaxon.*
+import com.beust.klaxon.Json
+import com.beust.klaxon.Klaxon
 
 private val klaxon = Klaxon()
 
