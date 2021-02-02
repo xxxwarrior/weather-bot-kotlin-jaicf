@@ -1,4 +1,4 @@
-package weather.bot
+package weatherBot
 
 import com.justai.jaicf.BotEngine
 import com.justai.jaicf.activator.caila.CailaIntentActivator
@@ -6,7 +6,7 @@ import com.justai.jaicf.activator.caila.CailaNLUSettings
 import com.justai.jaicf.activator.regex.RegexActivator
 import com.justai.jaicf.channel.jaicp.logging.JaicpConversationLogger
 import com.justai.jaicf.logging.Slf4jConversationLogger
-import weather.bot.scenario.MainScenario
+import weatherBot.scenario.MainScenario
 import java.util.*
 
 val accessToken: String = System.getenv("JAICP_API_TOKEN") ?: Properties().run {
