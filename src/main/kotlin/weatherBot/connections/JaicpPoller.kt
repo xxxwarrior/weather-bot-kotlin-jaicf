@@ -1,11 +1,11 @@
-package weather.bot.connections
+package weatherBot.connections
 
 import com.justai.jaicf.channel.jaicp.JaicpPollingConnector
 import com.justai.jaicf.channel.jaicp.channels.ChatApiChannel
 import com.justai.jaicf.channel.jaicp.channels.ChatWidgetChannel
 import com.justai.jaicf.channel.jaicp.channels.TelephonyChannel
-import weather.bot.accessToken
-import weather.bot.templateBot
+import weatherBot.accessToken
+import weatherBot.templateBot
 
 fun main() {
     JaicpPollingConnector(
