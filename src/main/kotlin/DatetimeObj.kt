@@ -3,7 +3,7 @@ import com.beust.klaxon.Klaxon
 
 private val klaxon = Klaxon()
 
-data class DatetimeObj (
+data class DatetimeObj(
     val year: String,
     val month: String,
     val day: String,
@@ -22,7 +22,7 @@ data class DatetimeObj (
     }
 }
 
-data class ExactValues (
+data class ExactValues(
     val year: Long,
     val month: Long,
     val day: Long
