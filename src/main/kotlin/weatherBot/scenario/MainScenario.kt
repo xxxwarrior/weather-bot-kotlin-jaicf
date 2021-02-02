@@ -1,10 +1,10 @@
-package weather.bot.scenario
+package weatherBot.scenario
 
-import com.justai.jaicf.activator.caila.caila
-import com.justai.jaicf.model.scenario.Scenario
-
+import DatetimeObj
 import WeatherApi
 import com.beust.klaxon.KlaxonException
+import com.justai.jaicf.activator.caila.caila
+import com.justai.jaicf.model.scenario.Scenario
 
 
 object MainScenario : Scenario() {
@@ -59,7 +59,8 @@ object MainScenario : Scenario() {
             action {
                 activator.caila?.run {
                     val city: String? = if (slots["city"] in arrayOf(
-                            "СПБ", "Спб", "спб", "Питер", "санкт петербург")
+                            "СПБ", "Спб", "спб", "Питер", "санкт петербург"
+                        )
                     ) "Санкт-Петербург" else slots["city"]
                     if (city != null) {
                         try {
@@ -68,7 +69,7 @@ object MainScenario : Scenario() {
                             }
                             if (slots["date"] == null) {
                                 reactions.say(
-                                        "В городе ${city.capitalize()} сейчас ${weather?.main?.temp} градусов, " +
+                                    "В городе ${city.capitalize()} сейчас ${weather?.main?.temp} градусов, " +
                                             "${weather?.weather?.get(0)?.description}. Ощущается как ${weather?.main?.feelsLike}. " +
                                             "Давление ${weather?.main?.pressure} мм рт. ст., влажность ${weather?.main?.humidity}%. " +
                                             "Скорость ветра ${weather?.wind?.speed} м/c."
@@ -112,4 +113,4 @@ object MainScenario : Scenario() {
             }
         }
     }
-    }
+}
