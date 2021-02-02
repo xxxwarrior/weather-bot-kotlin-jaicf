@@ -1,2 +1,1 @@
-rootProject.name = "jaicf-jaicp-caila-template"
-
+rootProject.name = "weather-bot-kotlin"
