@@ -1,11 +1,9 @@
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
-
 var apiKey = "8f6265a81af3154d852b30ebf630da10"
 
 class WeatherApi {
-
     fun getWeather(city: String, timestamp: String? = null): WeatherObj? {
         val client = OkHttpClient()
         val request = Request.Builder()
