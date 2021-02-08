@@ -15,7 +15,6 @@ data class DatetimeObj(
 
     val value: String
 ) {
-    fun toJson() = klaxon.toJsonString(this)
 
     companion object {
         fun fromJson(json: String) = klaxon.parse<DatetimeObj>(json)
