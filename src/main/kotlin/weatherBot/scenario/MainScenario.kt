@@ -5,6 +5,7 @@ import WeatherApi
 import com.beust.klaxon.KlaxonException
 import com.justai.jaicf.activator.caila.caila
 import com.justai.jaicf.model.scenario.Scenario
+import java.time.LocalDateTime
 
 object MainScenario : Scenario() {
 
@@ -63,21 +64,22 @@ object MainScenario : Scenario() {
 
                     if (city != null) {
                         try {
-                            val weather = WeatherApi().getWeather(city = city, timestamp = slots["date"])
+                            val currentDate = LocalDateTime.now().toString().take(10)
+                            val date = slots["date"]?.let { DatetimeObj.fromJson(it) }?.value?.take(10)
 
-                            if (slots["date"] == null) {
+                            val weather = WeatherApi().getWeather(city = city, date = slots["date"] != null && currentDate != date)
+
+                            if (slots["date"] == null || currentDate == date) {
                                 reactions.say(
                                     "В городе ${city.capitalize()} сейчас ${weather?.main?.temp} градусов, " +
                                             "${weather?.weather?.get(0)?.description}. Ощущается как ${weather?.main?.feelsLike}. " +
                                             "Давление ${weather?.main?.pressure} мм рт. ст., влажность ${weather?.main?.humidity}%. " +
                                             "Скорость ветра ${weather?.wind?.speed} м/c."
                                 )
-                            } else if (slots["date"] != null) {
-                                val timestamp = slots["date"]?.let { DatetimeObj.fromJson(it) }?.timestamp
-                                val timestampCut = timestamp.toString().take(10)
+                            } else {
                                 var isDateValid = false
                                 for (i in weather?.list!!) {
-                                    if (timestampCut == i.dt.toString()) {
+                                    if (date == i.dtTxt.take(10) ) {
                                         reactions.say(
                                             "Прогноз погоды в городе ${city.capitalize()} на ${i.dtTxt.take(10)}: температура ${i.main.temp} градусов, " +
                                                     "будет ${i.weather[0].description}. Ожидается давление ${i.main.pressure} " +
