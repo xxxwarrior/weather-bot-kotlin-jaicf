@@ -5,7 +5,9 @@ import WeatherApi
 import com.beust.klaxon.KlaxonException
 import com.justai.jaicf.activator.caila.caila
 import com.justai.jaicf.model.scenario.Scenario
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 object MainScenario : Scenario() {
 
@@ -64,7 +66,7 @@ object MainScenario : Scenario() {
 
                     if (city != null) {
                         try {
-                            val currentDate = LocalDateTime.now().toString().take(10)
+                            val currentDate = LocalDate.now().toString().take(10)
                             val date = slots["date"]?.let { DatetimeObj.fromJson(it) }?.value?.take(10)
 
                             val weather = WeatherApi().getWeather(city = city, date = slots["date"] != null && currentDate != date)
@@ -80,8 +82,11 @@ object MainScenario : Scenario() {
                                 var isDateValid = false
                                 for (i in weather?.list!!) {
                                     if (date == i.dtTxt.take(10) ) {
+                                        val parsedDate = LocalDate.parse(i.dtTxt.take(10))
+                                        val formatter = DateTimeFormatter.ofPattern("dd MMMM").withLocale(Locale("ru"))
+                                        val formattedDate = formatter.format(parsedDate)
                                         reactions.say(
-                                            "Прогноз погоды в городе ${city.capitalize()} на ${i.dtTxt.take(10)}: температура ${i.main.temp} градусов, " +
+                                            "Прогноз погоды в городе ${city.capitalize()} на $formattedDate: температура ${i.main.temp} градусов, " +
                                                     "будет ${i.weather[0].description}. Ожидается давление ${i.main.pressure} " +
                                                     "мм рт. ст., влажность ${i.main.humidity}% при скорости ветра ${i.wind.speed} м/c."
                                         )
