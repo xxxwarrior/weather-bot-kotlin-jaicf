@@ -3,7 +3,7 @@ import com.beust.klaxon.Klaxon
 
 private val klaxon = Klaxon()
 
-data class DatetimeObj(
+data class DatetimeData(
     val year: String,
     val month: String,
     val day: String,
@@ -17,7 +17,7 @@ data class DatetimeObj(
 ) {
 
     companion object {
-        fun fromJson(json: String) = klaxon.parse<DatetimeObj>(json)
+        fun fromJson(json: String) = klaxon.parse<DatetimeData>(json)
     }
 }
 

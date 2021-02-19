@@ -3,7 +3,7 @@ import com.beust.klaxon.Klaxon
 
 private val klaxon = Klaxon()
 
-data class WeatherObj(
+data class WeatherData(
     val base: String? = null,
     val city: City? = null,
     val clouds: Clouds? = null,
@@ -23,7 +23,7 @@ data class WeatherObj(
     val wind: Wind? = null,
 ) {
     companion object {
-        fun fromJson(json: String) = klaxon.parse<WeatherObj>(json)
+        fun fromJson(json: String) = klaxon.parse<WeatherData>(json)
     }
 }
 
